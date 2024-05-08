@@ -69,20 +69,34 @@ const images = [
     },
   ];
 
-  const galleryMarkup = images.reduce((acc, img) => {
-    acc += 
-    `
-    <li class="gallery-item">
-	<a class="gallery-link" href="${img.original}">
-		<img 
-			class="gallery-image" 
-			src="${img.preview}" 
-			alt="${img.description}" 
-			/>
-	</a>
-    </li>
-    `
-  }, "");
+//   const galleryMarkup = images.reduce((acc, img) => {
+//     acc += 
+//     `
+//     <li class="gallery-item">
+// 	<a class="gallery-link" href="${img.original}">
+// 		<img 
+// 			class="gallery-image" 
+// 			src="${img.preview}" 
+// 			alt="${img.description}" 
+// 			/>
+// 	</a>
+//     </li>
+//     `
+//   }, "");
+
+const galleryMarkup = images.map(img => {
+  return  `
+  <li class="gallery-item">
+  <a class="gallery-link" href="${img.original}">
+      <img 
+          class="gallery-image" 
+          src="${img.preview}" 
+          alt="${img.description}" 
+          />
+  </a>
+  </li>`
+})
+.join("");
 
   const gallery = document.querySelector(".gallery");
   gallery.insertAdjacentHTML('afterbegin', galleryMarkup);

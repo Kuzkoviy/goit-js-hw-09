@@ -3,34 +3,45 @@ const feedbackFormEmail = feedbackForm.elements.email,
     feedbackFormMessage = feedbackForm.elements.message;
 
 const localStorageKey = 'feedback-form-state';
-const savedFormData = localStorage.getItem(localStorageKey);
 
-
-if(savedFormData) {
-    const valueFormData = JSON.parse(savedFormData);
-    feedbackForm.email = valueFormData.email.trim();
-    feedbackForm.message = valueFormData.message.trim();
+let formData = {
+    email: '',
+    message: '',
 };
 
-feedbackForm.addEventListener('input', () => {
-    const formData = {
-        email: feedbackForm.email,
-        message: feedbackForm.message,
 
+setFromLocal();
+
+
+feedbackForm.addEventListener('input', () => {
+    formData = {
+        email: feedbackFormEmail.value,
+        message: feedbackFormMessage.value,
     };
 
     localStorage.setItem(localStorageKey, JSON.stringify(formData));
 });
 
-feedbackForm.addEventListener('sumbit', event => {
+feedbackForm.addEventListener('submit', event => {
     event.preventDefault();
 
-    if((feedbackFormEmail.value.trim() && feedbackFormMessage.value.trim())) {
-    console.log(JSON.parse(localStorage.getItem(localStorageKey)));
-    localStorage.removeItem(localStorageKey);
-    feedbackForm.reset();
-    }
+    if((feedbackFormEmail.value.trim() !==  null || feedbackFormMessage.value.trim() !== null)) {
+        formData = {
+            email: '',
+            message: '',
+        };
+        console.log(JSON.parse(localStorage.getItem(localStorageKey)));
+        localStorage.removeItem(localStorageKey);
+        feedbackForm.reset();
+        }
 });
 
+function setFromLocal() {
+    const savedFormData = localStorage.getItem(localStorageKey);
+    if(!savedFormData) return;
 
+    formData = JSON.parse(savedFormData);
+    feedbackFormEmail.value = formData.email;
+    feedbackFormMessage.value = formData.message;
+}
 
