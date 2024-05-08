@@ -88,6 +88,6 @@ const images = [
   gallery.insertAdjacentHTML('afterbegin', galleryMarkup);
 
   const lightbox = new SimpleLightbox('.gallery-link', {
+    captionsData: 'alt',
     captionDelay: 250,
-    captionsData: 'alt'
   });
