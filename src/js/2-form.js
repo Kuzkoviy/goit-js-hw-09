@@ -25,16 +25,24 @@ feedbackForm.addEventListener('input', () => {
 feedbackForm.addEventListener('submit', event => {
     event.preventDefault();
 
-    if((feedbackFormEmail.value.trim() !==  null || feedbackFormMessage.value.trim() !== null)) {
-        formData = {
-            email: '',
-            message: '',
-        };
-        console.log(JSON.parse(localStorage.getItem(localStorageKey)));
-        localStorage.removeItem(localStorageKey);
-        feedbackForm.reset();
-        }
+//     if((feedbackFormEmail.value.trim() ===  ' ' || feedbackFormMessage.value.trim() === ' ')) {
+//         formData = {
+//             email: '',
+//             message: '',
+//         };
+//         console.log(JSON.parse(localStorage.getItem(localStorageKey)));
+//         localStorage.removeItem(localStorageKey);
+//         feedbackForm.reset();
+//         }
+// });
+
+if (feedbackFormEmail.value.trim() && feedbackFormMessage.value.trim()) {
+    console.log(JSON.parse(localStorage.getItem(localStorageKey)));
+    localStorage.removeItem(localStorageKey);
+    feedbackForm.reset();
+  }
 });
+
 
 function setFromLocal() {
     const savedFormData = localStorage.getItem(localStorageKey);
