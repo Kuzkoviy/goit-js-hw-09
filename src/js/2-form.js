@@ -15,8 +15,8 @@ setFromLocal();
 
 feedbackForm.addEventListener('input', () => {
     formData = {
-        email: feedbackFormEmail.value,
-        message: feedbackFormMessage.value,
+        email: feedbackFormEmail.value.trim(),
+        message: feedbackFormMessage.value.trim(),
     };
 
     localStorage.setItem(localStorageKey, JSON.stringify(formData));
